@@ -6,7 +6,7 @@
 [![Bahasa](https://img.shields.io/badge/Bahasa-Kotlin-7F52FF?logo=kotlin&logoColor=white)](#)
 [![Antarmuka](https://img.shields.io/badge/Antarmuka-Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)](#)
 [![Arsitektur](https://img.shields.io/badge/Arsitektur-MVVM-2F6B4F)](#)
-[![SRS](https://img.shields.io/badge/SRS-v1.5-8B5E3C)](docs/SRS_SewaTenda_20240140209.pdf)
+[![SRS](https://img.shields.io/badge/SRS-v1.6-8B5E3C)](docs/SRS_SewaTenda_20240140209.pdf)
 [![Status](https://img.shields.io/badge/Status-Dalam%20Pengembangan-B26B00)](#-log-progres-mingguan)
 
 ---
@@ -27,7 +27,7 @@ autentikasi **JWT** dan basis data **MySQL**.
 | **Mata Kuliah** | Pengembangan Aplikasi Mobile (PAM) 2026 |
 | **Jenis** | Tugas Akademik — Project Akhir |
 | **Repositori** | `0209_SewaTenda` (4 digit NIM terakhir + nama project) |
-| **Dokumen SRS** | [`docs/SRS_SewaTenda_20240140209.pdf`](docs/SRS_SewaTenda_20240140209.pdf) — v1.5, 23 halaman |
+| **Dokumen SRS** | [`docs/SRS_SewaTenda_20240140209.pdf`](docs/SRS_SewaTenda_20240140209.pdf) — v1.6, 31 halaman, Appendix A–E |
 
 ---
 
@@ -61,8 +61,9 @@ sesuai pedoman Bagian D butir 6.
 | Transaksi Penyewaan | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Pengembalian & Denda | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-*(Tanda ✅ menandakan kebutuhan sudah **dispesifikasikan** pada SRS §3.1–3.5 dan **dirancang**
-pada mockup 17 layar. Implementasi kode menyusul.)*
+*(Tanda ✅ menandakan kebutuhan sudah **dispesifikasikan** pada SRS §3.1–3.5, **didokumentasikan**
+pada activity diagram SRS B.5–B.9, dan **dirancang** pada mockup 17 layar. Implementasi kode
+menyusul.)*
 
 ---
 
@@ -143,7 +144,8 @@ Antarmuka (Compose) → ViewModel (StateFlow<UiState>) → Repositori → Retrof
 
 ## 🗃️ Model Data
 
-Lima entitas utama yang saling terhubung (rincian lengkap pada **SRS Appendix B**):
+Lima entitas utama yang saling terhubung (rincian lengkap pada **SRS Appendix B** — ERD pada
+B.2 dan activity diagram CRUDS pada B.5–B.9):
 
 ```mermaid
 erDiagram
@@ -232,7 +234,7 @@ Kontrak lengkap (contoh permintaan/respons, kode status, dan pemetaan requiremen
 0209_SewaTenda/
 ├── README.md
 ├── docs/
-│   ├── SRS_SewaTenda_20240140209.pdf    # Software Requirements Specification v1.5
+│   ├── SRS_SewaTenda_20240140209.pdf    # Software Requirements Specification v1.6 (31 halaman)
 │   ├── UI_Preview.png                   # Mockup layar 01–10
 │   └── UI_Preview_CRUDS.png             # Mockup layar 11–17 (form dan dialog)
 │
@@ -310,7 +312,7 @@ Riwayat commit dijaga **bertahap** (bukan satu kali push di akhir).
 | Minggu | Periode | Capaian | Status |
 |--------|---------|---------|--------|
 | 1 | 17 – 23 Nov 2026 | Analisis kebutuhan; **SRS v1.5** selesai (23 halaman, Appendix A–E, spesifikasi API, matriks kepatuhan) | ✅ |
-| 2 | 24 – 30 Nov 2026 | Mockup antarmuka **17 layar** (10 layar utama + 5 form CRUDS + detail struk + dialog hapus); penyiapan repositori dan struktur folder | 🔄 |
+| 2 | 24 – 30 Nov 2026 | Mockup antarmuka **17 layar** (10 layar utama + 5 form CRUDS + detail struk + dialog hapus); penyiapan repositori dan struktur folder; **revisi SRS v1.6** — activity diagram CRUDS Appendix B.5–B.9 (31 halaman) | 🔄 |
 | 3 | 1 – 7 Des 2026 | Skema MySQL 5 tabel; backend autentikasi (JWT + refresh) dan modul Kategori | ⏳ |
 | 4 | 8 – 14 Des 2026 | Backend modul Unit Alat, Pelanggan, Transaksi, dan Pengembalian | ⏳ |
 | 5 | 15 – 21 Des 2026 | Kerangka Android: tema, navigasi, Retrofit, login, dan dasbor | ⏳ |
@@ -342,7 +344,8 @@ Unit Alat & Stok, Pelanggan, Transaksi Penyewaan, Pengembalian & Denda, Profil,
 
 ## 🗺️ Rencana Pengembangan
 
-- [x] Analisis kebutuhan dan penyusunan SRS (v1.5)
+- [x] Analisis kebutuhan dan penyusunan SRS (v1.6)
+- [x] Activity diagram CRUDS — Appendix B.5–B.9
 - [x] Mockup antarmuka 17 layar
 - [ ] Skema MySQL dan backend REST API
 - [ ] Android: autentikasi JWT dan refresh token
@@ -367,7 +370,7 @@ Bagian C (ketentuan repositori), Bagian D (persyaratan minimal fitur), Bagian F 
 
 | Keterangan | Isi |
 |---|---|
-| **Nama** |Andy Zaky Zein |
+| **Nama** | Andy Zaky Zein |
 | **NIM** | 20240140209 |
 | **Kelas** | C |
 | **Program Studi** | Teknologi Informasi |
