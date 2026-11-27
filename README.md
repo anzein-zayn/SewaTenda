@@ -7,6 +7,7 @@
 [![Antarmuka](https://img.shields.io/badge/Antarmuka-Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)](#)
 [![Arsitektur](https://img.shields.io/badge/Arsitektur-MVVM-2F6B4F)](#)
 [![SRS](https://img.shields.io/badge/SRS-v1.6-8B5E3C)](docs/SRS_SewaTenda_20240140209.pdf)
+[![API](https://img.shields.io/badge/API-0209__API__SewaTenda-339933?logo=nodedotjs&logoColor=white)](https://github.com/anzein-zayn/0209_API_SewaTenda)
 [![Status](https://img.shields.io/badge/Status-Dalam%20Pengembangan-B26B00)](#-log-progres-mingguan)
 
 ---
@@ -26,8 +27,14 @@ autentikasi **JWT** dan basis data **MySQL**.
 |---|---|
 | **Mata Kuliah** | Pengembangan Aplikasi Mobile (PAM) 2026 |
 | **Jenis** | Tugas Akademik — Project Akhir |
-| **Repositori** | `0209_SewaTenda` (4 digit NIM terakhir + nama project) |
+| **Repositori Mobile** | [`0209_SewaTenda`](https://github.com/anzein-zayn/0209_SewaTenda) — aplikasi Android (4 digit NIM terakhir + nama project) |
+| **Repositori API** | [`0209_API_SewaTenda`](https://github.com/anzein-zayn/0209_API_SewaTenda) — REST API backend (4 digit NIM terakhir + `API` + nama project) |
 | **Dokumen SRS** | [`docs/SRS_SewaTenda_20240140209.pdf`](docs/SRS_SewaTenda_20240140209.pdf) — v1.6, 31 halaman, Appendix A–E |
+
+> **Catatan:** proyek ini dipecah menjadi **dua repositori terpisah** sesuai pedoman —
+> **Mobile** untuk aplikasi Android dan **API** untuk backend. Dokumen SRS, mockup, dan
+> seluruh kode Android berada di repositori Mobile; kode backend dan skema basis data berada
+> di repositori API.
 
 ---
 
@@ -86,7 +93,7 @@ flowchart LR
         RA --- AI
     end
 
-    subgraph Peladen["🖥️ Backend"]
+    subgraph Peladen["🖥️ Backend — 0209_API_SewaTenda"]
         EX["REST API Express"]
         DB[("MySQL")]
         EX --> DB
@@ -230,7 +237,16 @@ Kontrak lengkap (contoh permintaan/respons, kode status, dan pemetaan requiremen
 
 ## 📁 Struktur Repositori
 
-```
+Proyek SewaTenda terdiri atas **dua repositori GitHub terpisah**:
+
+| Repositori | Isi | Alamat |
+|---|---|---|
+| 📱 **Mobile** | Aplikasi Android (Jetpack Compose), dokumen SRS, dan mockup | [`0209_SewaTenda`](https://github.com/anzein-zayn/0209_SewaTenda) |
+| 🖥️ **API** | REST API backend (Node.js + Express + MySQL) | [`0209_API_SewaTenda`](https://github.com/anzein-zayn/0209_API_SewaTenda) |
+
+### 📱 Repositori Mobile — `0209_SewaTenda`
+
+````
 0209_SewaTenda/
 ├── README.md
 ├── docs/
@@ -238,32 +254,37 @@ Kontrak lengkap (contoh permintaan/respons, kode status, dan pemetaan requiremen
 │   ├── UI_Preview.png                   # Mockup layar 01–10
 │   └── UI_Preview_CRUDS.png             # Mockup layar 11–17 (form dan dialog)
 │
-├── app/                                 # 📱 Aplikasi Android
-│   └── src/main/java/com/sewatenda/
-│       ├── data/
-│       │   ├── remote/                  # ApiService, AuthInterceptor, ApiClient
-│       │   ├── repository/              # Implementasi repositori per modul
-│       │   ├── model/                   # DTO permintaan dan respons
-│       │   └── local/                   # FileStorageHelper (struk PDF)
-│       ├── ui/
-│       │   ├── navigation/              # NavGraph, Routes
-│       │   ├── screens/                 # login, dasbor, kategori, unit, ...
-│       │   ├── components/              # AppBar, SearchBar, EmptyState, dll.
-│       │   └── theme/                   # Color, Type, Theme (hijau–coklat)
-│       ├── viewmodel/                   # ViewModel + UiState per modul
-│       └── util/                        # Formatter (Rupiah, tanggal), Session
-│
-└── backend/                             # 🖥️ REST API
-    ├── src/
-    │   ├── routes/                      # auth, kategori, unit, pelanggan, ...
-    │   ├── controllers/                 # Logika tiap endpoint
-    │   ├── models/                      # Query MySQL
-    │   └── middlewares/                 # verifyToken, errorHandler
-    ├── sql/
-    │   └── schema.sql                   # 5 tabel + relasi + data awal
-    ├── .env.example                     # Contoh konfigurasi
-    └── package.json
-```
+└── app/                                 # 📱 Aplikasi Android
+    └── src/main/java/com/sewatenda/
+        ├── data/
+        │   ├── remote/                  # ApiService, AuthInterceptor, ApiClient
+        │   ├── repository/              # Implementasi repositori per modul
+        │   ├── model/                   # DTO permintaan dan respons
+        │   └── local/                   # FileStorageHelper (struk PDF)
+        ├── ui/
+        │   ├── navigation/              # NavGraph, Routes
+        │   ├── screens/                 # login, dasbor, kategori, unit, ...
+        │   ├── components/              # AppBar, SearchBar, EmptyState, dll.
+        │   └── theme/                   # Color, Type, Theme (hijau–coklat)
+        ├── viewmodel/                   # ViewModel + UiState per modul
+        └── util/                        # Formatter (Rupiah, tanggal), Session
+````
+
+### 🖥️ Repositori API — `0209_API_SewaTenda`
+
+````
+0209_API_SewaTenda/
+├── README.md
+├── src/
+│   ├── routes/                          # auth, kategori, unit, pelanggan, ...
+│   ├── controllers/                     # Logika tiap endpoint
+│   ├── models/                          # Query MySQL
+│   └── middlewares/                     # verifyToken, errorHandler
+├── sql/
+│   └── schema.sql                       # 5 tabel + relasi + data awal
+├── .env.example                         # Contoh konfigurasi
+└── package.json
+````
 
 ---
 
@@ -277,12 +298,18 @@ Kontrak lengkap (contoh permintaan/respons, kode status, dan pemetaan requiremen
 
 ### 1️⃣ Backend dan Basis Data
 
+Backend berada di **repositori terpisah**:
+[`0209_API_SewaTenda`](https://github.com/anzein-zayn/0209_API_SewaTenda)
+
 ```bash
+# Mengambil repositori API
+git clone https://github.com/anzein-zayn/0209_API_SewaTenda.git
+cd 0209_API_SewaTenda
+
 # Membuat basis data dan mengimpor skema
-mysql -u root -p < backend/sql/schema.sql
+mysql -u root -p < sql/schema.sql
 
 # Menyiapkan konfigurasi
-cd backend
 cp .env.example .env        # sesuaikan DB_HOST, DB_USER, DB_PASS, JWT_SECRET
 
 # Memasang dependensi dan menjalankan
@@ -304,82 +331,25 @@ Uji cepat: `GET http://localhost:3000/api/health` → `{ "success": true }`
 
 ---
 
-## 📊 Log Progres Mingguan
+## 📊 Progress Mingguan (Weekly Progress)
 
-Sesuai pedoman Bagian C, README ini diperbarui **setiap minggu** sebagai laporan progres.
-Riwayat commit dijaga **bertahap** (bukan satu kali push di akhir).
+Berikut adalah linimasa pengembangan proyek **SewaTenda** yang direkonstruksi secara riil
+berdasarkan riwayat `git commit` pada
+[`0209_SewaTenda`](https://github.com/anzein-zayn/0209_SewaTenda) (Mobile) dan
+[`0209_API_SewaTenda`](https://github.com/anzein-zayn/0209_API_SewaTenda) (API), mulai dari
+**pertemuan 9 hingga pertemuan 16** sesuai pedoman Bagian C.
 
-| Minggu | Periode | Capaian | Status |
-|--------|---------|---------|--------|
-| 1 | 17 – 23 Nov 2026 | Analisis kebutuhan; **SRS v1.5** selesai (23 halaman, Appendix A–E, spesifikasi API, matriks kepatuhan) | ✅ |
-| 2 | 24 – 30 Nov 2026 | Mockup antarmuka **17 layar** (10 layar utama + 5 form CRUDS + detail struk + dialog hapus); penyiapan repositori dan struktur folder; **revisi SRS v1.6** — activity diagram CRUDS Appendix B.5–B.9 (31 halaman) | 🔄 |
-| 3 | 1 – 7 Des 2026 | Skema MySQL 5 tabel; backend autentikasi (JWT + refresh) dan modul Kategori | ⏳ |
-| 4 | 8 – 14 Des 2026 | Backend modul Unit Alat, Pelanggan, Transaksi, dan Pengembalian | ⏳ |
-| 5 | 15 – 21 Des 2026 | Kerangka Android: tema, navigasi, Retrofit, login, dan dasbor | ⏳ |
-| 6 | 22 – 28 Des 2026 | Android 5 modul CRUDS (daftar, form, pencarian, hapus) | ⏳ |
-| 7 | 29 Des 2026 – 4 Jan 2027 | Penyimpanan berkas struk PDF; validasi form; kondisi galat dan data kosong | ⏳ |
-| 8 | 5 – 11 Jan 2027 | Pengujian menyeluruh, perbaikan bug, persiapan demo dan presentasi | ⏳ |
+### 📅 Pertemuan 9 (17 – 23 Nov 2026) — `0209_SewaTenda`
 
-> Target tanggal dapat disesuaikan dengan jadwal presentasi.
+- **Inisialisasi Repositori & Struktur Dokumen** (`b5de66b`, `1a0555e`, `73e318b`, `ac59927`, `eace811`): Initial commit, pembuatan dan penghapusan folder `docs/`, unggah berkas SRS PDF awal, serta penambahan struktur dasar proyek.
+- **Penyusunan Deskripsi & Dokumen Proyek** (`e00d09c`, `c4354b8`, `2003bae`, `e0dbba7`): Penambahan deskripsi, daftar fitur, arsitektur, dan petunjuk instalasi; perbaikan penamaan berkas menjadi `SRS_SewaTenda_20240140209.pdf`.
 
----
+### 📅 Pertemuan 10 (24 – 30 Nov 2026) — `0209_SewaTenda` + `0209_API_SewaTenda`
 
-## 🎨 Desain Antarmuka
+- **Mockup Antarmuka 17 Layar** (`a90b851`): Unggah hasil desain 10 layar utama dan 7 layar CRUDS/detail ke dalam `docs/` (`UI_Preview.png`, `UI_Preview_CRUDS.png`).
+- **Revisi SRS ke v1.6** (`ac37436`): Pembaruan README dan dokumen SRS menjadi versi 1.6 — penambahan activity diagram CRUDS pada Appendix B.5–B.9 (31 halaman, 7 gambar).
+- **Pemecahan Repositori** ⏳: Pemisahan kode menjadi **`0209_SewaTenda`** (Mobile: Android + dokumen) dan **`0209_API_SewaTenda`** (API: Express + MySQL), beserta penyesuaian README pada kedua repositori. *(hash commit menyusul setelah push)*
 
-Tema **hijau hutan dan coklat tanah** — merepresentasikan suasana alam pendakian.
+### 📅 Pertemuan 11 (1 – 7 Des 2026) — `0209_API_SewaTenda`
 
-| Warna | Kode Hex | Penggunaan |
-|-------|----------|------------|
-| Hijau utama | `#2F6B4F` | App bar, tombol primer, aksen aktif |
-| Hijau gelap | `#1F4D38` | Gradasi, elemen sekunder |
-| Coklat | `#8B5E3C` | Aksen denda, badge peringatan |
-| Krem | `#F7F3EC` | Latar halaman |
-| Tinta | `#2A2622` | Teks utama |
-
-Ketujuh belas layar mockup mencakup: Splash, Login, Register, Dasbor, Kategori Alat,
-Unit Alat & Stok, Pelanggan, Transaksi Penyewaan, Pengembalian & Denda, Profil,
-5 form CRUDS, Detail Transaksi & Struk, serta Konfirmasi Hapus.
-
----
-
-## 🗺️ Rencana Pengembangan
-
-- [x] Analisis kebutuhan dan penyusunan SRS (v1.6)
-- [x] Activity diagram CRUDS — Appendix B.5–B.9
-- [x] Mockup antarmuka 17 layar
-- [ ] Skema MySQL dan backend REST API
-- [ ] Android: autentikasi JWT dan refresh token
-- [ ] Android: dasbor dan 5 modul CRUDS
-- [ ] Penyimpanan berkas struk PDF
-- [ ] Pengujian dan demo presentasi
-
----
-
-## 📄 Lisensi dan Catatan Akademik
-
-Proyek ini dibuat untuk keperluan **akademik** (Project Akhir PAM 2026) dan tidak untuk
-distribusi komersial. Dokumen SRS, desain antarmuka, dan kode sumber merupakan karya
-mahasiswa penulis.
-
-**Rujukan pedoman:** *Pedoman Project Akhir Pengembangan Aplikasi Mobile 2026* —
-Bagian C (ketentuan repositori), Bagian D (persyaratan minimal fitur), Bagian F (penilaian).
-
----
-
-## 👤 Penulis
-
-| Keterangan | Isi |
-|---|---|
-| **Nama** | Andy Zaky Zein |
-| **NIM** | 20240140209 |
-| **Kelas** | C |
-| **Program Studi** | Teknologi Informasi |
-| **Mata Kuliah** | Pengembangan Aplikasi Mobile (PAM) 2026 |
-| **Dosen Pengampu** | _\<diisi\>_ |
-| **NIDN** | _\<diisi\>_ |
-
----
-
-<p align="center">
-  <sub>© 2026 — SewaTenda · Project Akhir Pengembangan Aplikasi Mobile</sub>
-</p>
+⏳ Belum dimulai — rencana: skema MySQL 5 tabel beserta data awal; autentikasi JWT (access + refresh
